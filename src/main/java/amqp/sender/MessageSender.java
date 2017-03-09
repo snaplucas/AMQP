@@ -7,8 +7,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessageSender {
 
-    @Autowired
     private AmqpTemplate amqpTemplate;
+
+    @Autowired
+    public MessageSender(AmqpTemplate amqpTemplate) {
+        this.amqpTemplate = amqpTemplate;
+    }
 
     public void sendMessage(String queue, Object message) {
         amqpTemplate.convertAndSend(queue, message);
